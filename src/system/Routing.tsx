@@ -8,8 +8,8 @@ const Routing = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
-          <Route path="'/sign-in" element={<SignInForm />} />
-          <Route path="'/sign-up" element={<SignUpForm />} />
+          <Route path="/sign-in" element={<SignInForm />} />
+          <Route path="/sign-up" element={<SignUpForm />} />
         </Route>
         <Route element={<MainLayout />}>
           <Route index path="/" element={<ExamPage />} />
