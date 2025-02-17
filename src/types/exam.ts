@@ -1,6 +1,7 @@
 export interface IAnswer {
   correct: boolean;
   answer: string;
+  selected: boolean;
 }
 
 export interface IQuestion {
