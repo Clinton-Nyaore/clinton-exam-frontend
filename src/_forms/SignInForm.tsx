@@ -2,57 +2,108 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/_components/inputs";
-// import { Input } from "@/components/ui/input";
+import { MyButton, StyledInput } from "@/_components/inputs";
+import { useSignInMutation } from "@/state/features/auth/authApi";
+import { toaster } from "@/_components/toaster";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  email: z.string().email(),
+
+  password: z.string().min(2, {
+    message: "password must be at least 8 characters.",
   }),
 });
 
 const SignInForm = () => {
+  const navigate = useNavigate();
+  const [signIn] = useSignInMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
+      password: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await signIn(values).unwrap();
+      toaster("Log in successful", "success");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toaster(
+        "Log in failed. Please check you credentials then try again!",
+        "error"
+      );
+    }
+    // console.log(values);
   }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <div className="text-white font-bold my-2">
+        <h2 className="text-2xl my-1">Log In</h2>
+        <p className="text-xl my-2 font-light">
+          Please log in to start an exam
+        </p>
+      </div>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 w-full text-white"
+      >
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel className="text-lg">Email</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <StyledInput
+                  type="email"
+                  placeholder="johndoe@example.com"
+                  className="placeholder:text-white"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-lg">Password</FormLabel>
+              <FormControl>
+                <StyledInput
+                  type="password"
+                  // placeholder="shadcn"
+                  className="placeholder:text-white"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <MyButton
+          type="submit"
+          className="bg-blue-500 w-full hover:bg-blue-400"
+        >
+          Log in
+        </MyButton>
       </form>
     </Form>
   );
