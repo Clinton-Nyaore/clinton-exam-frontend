@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi, authReducer } from "../features/auth";
+import { examReducer } from "../features/exam";
 
 // ...
 
@@ -7,6 +8,9 @@ const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
     authReducer: authReducer,
+
+    // Exam
+    examReducer: examReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

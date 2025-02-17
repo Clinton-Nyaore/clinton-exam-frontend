@@ -1,4 +1,4 @@
-import { ExamPage } from "@/_pages";
+import { ExamPage, ExamStart } from "@/_pages";
 import { SignInForm, SignUpForm } from "@/_forms";
 import { AuthLayout, MainLayout } from "@/_layouts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -12,7 +12,8 @@ const Routing = () => {
           <Route path="/sign-up" element={<SignUpForm />} />
         </Route>
         <Route element={<MainLayout />}>
-          <Route index path="/" element={<ExamPage />} />
+          <Route index path="/" element={<ExamStart />} />
+          <Route index path="/exam" element={<ExamPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
