@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ExamList = () => {
   const { data: examList } = useGetExamsQuery("");
   return (
-    <section className="w-[90%] mx-auto exam-page">
+    <section className="w-[90%] mx-auto">
       <h3 className="my-3 text-2xl">Please select an exam</h3>
 
       <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 ">

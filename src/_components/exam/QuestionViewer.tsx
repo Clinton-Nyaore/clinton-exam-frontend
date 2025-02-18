@@ -2,12 +2,11 @@ import { IQuestion } from "@/types/exam";
 import Question from "./Question";
 import { useState } from "react";
 import { MyButton } from "../inputs";
+import { Link } from "react-router-dom";
 // import { ArrowRight } from "lucide-react";
 
 const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  console.log(questionList, "questionList");
 
   const nextQuestion = () => {
     if (currentIndex < questionList.length - 1) {
@@ -23,7 +22,7 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
 
   const handleExamSubmission = () => {};
   return (
-    <section className="relative exam-page">
+    <section className="">
       <div>
         <Question
           question={questionList[currentIndex]}
@@ -34,7 +33,7 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
 
       <div
         id="#navigation-buttons"
-        className="flex justify-end space-x-4 absolute bottom-8 right-7"
+        className="flex justify-end space-x-4 my-12"
       >
         {/* <MyButton
           disabled={currentIndex === 0}
@@ -48,7 +47,7 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
           <MyButton
             disabled={currentIndex === questionList.length - 1}
             onClickHandler={nextQuestion}
-            className=""
+            className="bg-gray-500"
             type="button"
           >
             Next
@@ -56,14 +55,17 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
         )}
 
         {currentIndex == questionList.length - 1 && (
-          <MyButton
-            disabled={currentIndex !== questionList.length - 1}
-            onClickHandler={handleExamSubmission}
-            className=""
-            type="button"
-          >
-            Submit
-          </MyButton>
+          <Link className="text-blue" to={"/exam-end"}>
+            <MyButton
+              disabled={currentIndex !== questionList.length - 1}
+              onClickHandler={handleExamSubmission}
+              className="bg-gray-500"
+              type="button"
+            >
+              Submit
+            </MyButton>
+          </Link>
+
           // <button
           //   onClick={handleExamSubmission}
           //   className="flex items-center justify-center p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all duration-200 shadow-md"

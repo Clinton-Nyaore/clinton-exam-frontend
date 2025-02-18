@@ -13,6 +13,7 @@ const MainLayout = () => {
       {isLoggedIn ? (
         <>
           <Header />
+          {/* <ShadedBar/> */}
           <Outlet />
           <Footer />
         </>
