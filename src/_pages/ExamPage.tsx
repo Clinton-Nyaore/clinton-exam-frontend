@@ -9,6 +9,8 @@ const ExamPage = () => {
     (exam) => exam.name == exam_name
   );
 
+  console.log(exam, "exam");
+
   return (
     <section className="w-[90%] mx-auto exam-page">
       {exam?.questions && <QuestionViewer questionList={exam.questions} />}

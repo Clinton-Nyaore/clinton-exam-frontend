@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authApi, authReducer } from "../features/auth";
-import { examReducer } from "../features/exam";
+import { examApi, examReducer } from "../features/exam";
 
-// ...
 
 const store = configureStore({
   reducer: {
@@ -11,10 +10,11 @@ const store = configureStore({
 
     // Exam
     examReducer: examReducer,
+    [examApi.reducerPath]: examApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat([authApi.middleware, examApi.middleware]),
 });
 
 // Infer the `RootState`,  `AppDispatch`, and `AppStore` types from the store itself

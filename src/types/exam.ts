@@ -1,11 +1,11 @@
 export interface IAnswer {
   correct: boolean;
-  answer: string;
+  text: string;
   selected: boolean;
 }
 
 export interface IQuestion {
-  question: string;
+  question_text: string;
   answers: IAnswer[];
 }
 
@@ -14,4 +14,5 @@ export interface IExam {
   description: string;
   timeline?: string;
   questions: IQuestion[];
+  image: string;
 }
