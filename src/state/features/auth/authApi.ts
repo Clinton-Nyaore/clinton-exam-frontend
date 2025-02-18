@@ -1,8 +1,8 @@
 import { BASE_BACKEND_URL } from "@/constants";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-console.log(import.meta.env, "ALL ENV VARIABLES");
-console.log(BASE_BACKEND_URL, "BASE_BACKEND_URL");
+// console.log(import.meta.env, "ALL ENV VARIABLES");
+// console.log(BASE_BACKEND_URL, "BASE_BACKEND_URL");
 
 export const authApi = createApi({
   reducerPath: "authApi",

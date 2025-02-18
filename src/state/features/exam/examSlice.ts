@@ -4,7 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState: IExam[] = [
   {
     name: "Chemistry Paper II",
-    description: "This exam covers everything you need to know",
+    description:
+      "This exam covers everything you need to know about chemical composition of matter",
+    timeline: "3hrs",
     questions: [
       {
         question: "What is the molecular mass of water?",

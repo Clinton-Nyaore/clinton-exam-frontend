@@ -13,7 +13,7 @@ const Routing = () => {
         </Route>
         <Route element={<MainLayout />}>
           <Route index path="/" element={<ExamStart />} />
-          <Route index path="/exam" element={<ExamPage />} />
+          <Route index path="/exam/:exam_name" element={<ExamPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

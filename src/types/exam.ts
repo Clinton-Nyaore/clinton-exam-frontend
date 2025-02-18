@@ -12,5 +12,6 @@ export interface IQuestion {
 export interface IExam {
   name: string;
   description: string;
+  timeline?: string;
   questions: IQuestion[];
 }
