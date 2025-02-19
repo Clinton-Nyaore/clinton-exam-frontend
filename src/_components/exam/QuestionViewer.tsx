@@ -1,7 +1,7 @@
 import { IQuestion } from "@/types/exam";
 import Question from "./Question";
 import { useState } from "react";
-import { MyButton, SignpostButton } from "../inputs";
+import { SignpostButton } from "../inputs";
 import { Link } from "react-router-dom";
 
 const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {

@@ -17,7 +17,7 @@ const Header = () => {
 
   console.log(examHeaderName, "examHeaderName");
   return (
-    <>
+    <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
         <img src="/logo.jpeg" className="h-24" alt="" />
 
@@ -43,7 +43,7 @@ const Header = () => {
       </div>
 
       <div className="ribbon w-full mt-2"></div>
-    </>
+    </section>
   );
 };
 export default Header;
