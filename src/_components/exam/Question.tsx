@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IQuestion } from "@/types/exam";
 import Answers from "./Answers";
+import { CalculatorIcon } from "lucide-react";
 
 const Question = ({
   question,
@@ -48,13 +49,16 @@ const Question = ({
 
   return (
     <div>
-      <div id="question-info" className="flex">
+      <div id="question-info" className="flex place-items-center">
         <div id="question-numbers" className="my-3 mb-6">
           <span className="text-2xl font-bold">
             Question: {index} of {length}
           </span>
         </div>
-        <div className="ml-auto flex space-x-3 items-center px-3" id="time">
+        <div
+          className="ml-auto flex place-items-center space-x-3 items-center px-3"
+          id="time"
+        >
           <div className="font-bold">
             <p>
               Time remaining:{" "}
@@ -79,10 +83,22 @@ const Question = ({
             </button>
           </div>
         </div>
+
+        <div
+          id="calculator-icon"
+          className="flex justify-center items-center my-2"
+        >
+          <CalculatorIcon size={"68px"} />
+        </div>
       </div>
 
       <div className="flex font-bold text-xl space-x-4">
         <p className="text-gray-600">{question.question_text}</p>
+      </div>
+
+      {/* Dots section */}
+      <div id="dots" className="">
+        <DotsSeparator count={25} />
       </div>
 
       <div className="ml-8 mt-2">
@@ -93,3 +109,13 @@ const Question = ({
 };
 
 export default Question;
+
+const DotsSeparator = ({ count }: { count: number }) => {
+  return (
+    <div id="dots" className="flex justify-between space-x-2 my-6 w-full">
+      {Array.from({ length: count }).map((_, index) => (
+        <span key={index} className="w-2 h-2 bg-gray-400 rounded-full"></span>
+      ))}
+    </div>
+  );
+};

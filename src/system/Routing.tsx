@@ -15,7 +15,7 @@ const Routing = () => {
         <Route element={<MainLayout />}>
           <Route index path="/" element={<ExamList />} />
           <Route index path="/exam-end" element={<ExamEnded />} />
-          <Route index path="/exam/:exam_name" element={<ExamPage />} />
+          <Route index path="/exam-page/:exam_name" element={<ExamPage />} />
           <Route index path="/exam-start/:exam_name" element={<ExamStart />} />
         </Route>
       </Routes>

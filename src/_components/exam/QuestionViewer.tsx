@@ -1,9 +1,8 @@
 import { IQuestion } from "@/types/exam";
 import Question from "./Question";
 import { useState } from "react";
-import { MyButton } from "../inputs";
+import { MyButton, SignpostButton } from "../inputs";
 import { Link } from "react-router-dom";
-// import { ArrowRight } from "lucide-react";
 
 const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,26 +43,12 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
           Previous
         </MyButton> */}
         {currentIndex !== questionList.length - 1 && (
-          <MyButton
-            disabled={currentIndex === questionList.length - 1}
-            onClickHandler={nextQuestion}
-            className="bg-gray-500"
-            type="button"
-          >
-            Next
-          </MyButton>
+          <SignpostButton label={nextQuestion} />
         )}
 
         {currentIndex == questionList.length - 1 && (
           <Link className="text-blue" to={"/exam-end"}>
-            <MyButton
-              disabled={currentIndex !== questionList.length - 1}
-              onClickHandler={handleExamSubmission}
-              className="bg-gray-500"
-              type="button"
-            >
-              Submit
-            </MyButton>
+            <SignpostButton label={handleExamSubmission} />
           </Link>
 
           // <button

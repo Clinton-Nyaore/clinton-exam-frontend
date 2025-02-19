@@ -1,4 +1,4 @@
-import { BASE_IMAGE_URL } from "@/constants";
+// import { BASE_IMAGE_URL } from "@/constants";
 import { useGetExamsQuery } from "@/state/features/exam/examApi";
 import { Link } from "react-router-dom";
 
@@ -14,9 +14,9 @@ const ExamList = () => {
             <Link key={index} to={`/exam-start/${exam.name}`}>
               <section className="rounded shadow-md hover:cursor-pointer">
                 <img
-                  className="w-full rounded-t-2xl"
-                  src={`${BASE_IMAGE_URL}${exam.image}`}
-                  alt={`${BASE_IMAGE_URL}${exam.image}`}
+                  className="w-44 rounded-md text-2xl"
+                  src="/logo.jpeg"
+                  alt=""
                 />
                 <div className="p-2 text-center">
                   <p className="font-bold text-md ">{exam.name}</p>

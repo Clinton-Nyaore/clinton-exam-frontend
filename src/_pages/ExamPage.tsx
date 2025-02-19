@@ -12,7 +12,7 @@ const ExamPage = () => {
   console.log(exam, "exam");
 
   return (
-    <section className="w-[90%] mx-auto">
+    <section className="w-[80%] mx-auto">
       {exam?.questions && <QuestionViewer questionList={exam.questions} />}
     </section>
   );
