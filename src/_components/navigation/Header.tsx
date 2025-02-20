@@ -16,8 +16,8 @@ const Header = () => {
   return (
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
-        <div className="flex place-items-center justify-around w-1/2">
-          <img src="/logo.jpeg" className="h-24" alt="" />
+        <div className="flex place-items-center justify-around w-1/3">
+          <img src="/logo.jpeg" className="h-22 mr-auto" alt="" />
 
           {pathname.includes("/exam-page") && (
             <div>
