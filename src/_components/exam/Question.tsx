@@ -49,11 +49,15 @@ const Question = ({
     }
   };
 
-  // Format time helper
+  // Format time helper (HH:MM:SS)
   const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -71,11 +75,11 @@ const Question = ({
           <div className="font-bold">
             <p>
               Time remaining:{" "}
-              <span className="text-gray-500">{formatTime(timeLeft)}</span>
+              <span className="text-gray-800 mx-2">{formatTime(timeLeft)}</span>
             </p>
             <p>
               Pause remaining:{" "}
-              <span className="text-gray-500">
+              <span className="text-gray-800 mx-1">
                 {formatTime(totalPauseTimeLeft)}
               </span>
             </p>
@@ -87,7 +91,7 @@ const Question = ({
                 totalPauseTimeLeft === 0
                   ? "bg-gray-300 cursor-not-allowed"
                   : isPaused
-                  ? "bg-red-400"
+                  ? "bg-red-300"
                   : "bg-gray-400"
               }`}
               onClick={handlePause}
