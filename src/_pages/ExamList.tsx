@@ -2,6 +2,8 @@
 import { useGetExamsQuery } from "@/state/features/exam/examApi";
 import { Link } from "react-router-dom";
 
+import logo from "@/assets/logo.jpeg";
+
 const ExamList = () => {
   const { data: examList } = useGetExamsQuery("");
   return (
@@ -13,11 +15,7 @@ const ExamList = () => {
           return (
             <Link key={index} to={`/exam-start/${exam.name}`}>
               <section className="rounded shadow-md hover:cursor-pointer">
-                <img
-                  className="w-44 rounded-md text-2xl"
-                  src="/logo.jpeg"
-                  alt=""
-                />
+                <img className="w-44 rounded-md text-2xl" src={logo} alt="" />
                 <div className="p-2 text-center">
                   <p className="font-bold text-md ">{exam.name}</p>
                   <p className="text-sm">{exam.description}</p>

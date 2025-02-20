@@ -2,6 +2,8 @@ import { examName, removeExamName } from "@/state/features/exam/headerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
+import headerLogo from '@/assets/logo.jpeg'
+
 const Header = () => {
   const examHeaderName = useSelector(examName);
   const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const Header = () => {
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
         <div className="flex place-items-center justify-around w-1/4">
-          <img src="/logo.jpeg" className="h-22 mr-auto" alt="" />
+          <img src={headerLogo} className="h-22 mr-auto" alt="" />
 
           {pathname.includes("/exam-page") && (
             <div>

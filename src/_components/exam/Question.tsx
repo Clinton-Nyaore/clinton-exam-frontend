@@ -19,7 +19,7 @@ const Question = ({
   const [totalPauseTimeLeft, setTotalPauseTimeLeft] = useState(pauseLimit);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Exam Timer Effect
+  // Exam Timer Effect (runs only when NOT paused)
   useEffect(() => {
     if (!isPaused && timeLeft > 0) {
       const timer = setInterval(() => {
@@ -29,26 +29,27 @@ const Question = ({
     }
   }, [isPaused, timeLeft]);
 
-  // Pause Timer Effect
+  // Pause Timer Effect (runs only when paused)
   useEffect(() => {
     if (isPaused && totalPauseTimeLeft > 0) {
       const pauseTimer = setInterval(() => {
         setTotalPauseTimeLeft((prev) => prev - 1);
-        setTimeLeft((prev) => prev - 1); // Keep exam time in sync
       }, 1000);
 
       return () => clearInterval(pauseTimer);
     } else if (isPaused && totalPauseTimeLeft === 0) {
-      setIsPaused(false); // Auto-resume when pause time is exhausted
+      setIsPaused(false); // Force resume when pause time is exhausted
     }
   }, [isPaused, totalPauseTimeLeft]);
 
+  // Toggle pause state (only if pause time is available)
   const handlePause = () => {
     if (totalPauseTimeLeft > 0) {
-      setIsPaused(!isPaused); // Toggle pause state
+      setIsPaused(!isPaused);
     }
   };
 
+  // Format time helper
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -85,6 +86,8 @@ const Question = ({
               className={`px-6 py-3.5 font-bold ${
                 totalPauseTimeLeft === 0
                   ? "bg-gray-300 cursor-not-allowed"
+                  : isPaused
+                  ? "bg-red-400"
                   : "bg-gray-400"
               }`}
               onClick={handlePause}
