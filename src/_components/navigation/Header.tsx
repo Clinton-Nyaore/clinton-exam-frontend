@@ -13,9 +13,6 @@ const Header = () => {
 
   const { pathname } = useLocation();
 
-  console.log(pathname, "pathname");
-
-  console.log(examHeaderName, "examHeaderName");
   return (
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">

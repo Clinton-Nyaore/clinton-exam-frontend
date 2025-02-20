@@ -40,11 +40,12 @@ const SignUpForm = () => {
       toaster("User creation successful. You can now log in...", "success");
       navigate("/sign-in");
     } catch (error) {
-      console.log(error);
       toaster(
         "User registration failed. Please try again with a different email!",
         "error"
       );
+
+      return error
     }
   }
 

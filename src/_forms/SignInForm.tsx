@@ -40,13 +40,13 @@ const SignInForm = () => {
       toaster("Log in successful", "success");
       navigate("/");
     } catch (error) {
-      console.log(error);
       toaster(
         "Log in failed. Please check you credentials then try again!",
         "error"
       );
+
+      return error
     }
-    // console.log(values);
   }
 
   return (

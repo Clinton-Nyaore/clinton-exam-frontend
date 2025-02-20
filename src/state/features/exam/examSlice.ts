@@ -12,8 +12,7 @@ const examSlice = createSlice({
     builder.addMatcher(
       examApi.endpoints.getExams.matchFulfilled,
       (state, action) => {
-        console.log(state);
-        return action.payload;
+        return [...state, ...action.payload];
       }
     );
   },

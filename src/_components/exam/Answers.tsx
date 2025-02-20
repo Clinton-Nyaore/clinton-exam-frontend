@@ -2,7 +2,7 @@ import { IAnswer } from "@/types/exam";
 
 const Answers = ({ answers, question }: { answers: IAnswer[]; question:string }) => {
   function chooseAnswer(index: number) {
-    console.log(`Selected answer: ${answers[index].text}`);
+    return index
   }
   return (
     <div>
