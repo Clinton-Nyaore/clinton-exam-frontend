@@ -1,5 +1,4 @@
 import { examName, removeExamName } from "@/state/features/exam/headerSlice";
-import { CrossIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
@@ -16,7 +15,7 @@ const Header = () => {
   return (
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
-        <div className="flex place-items-center justify-around w-1/3">
+        <div className="flex place-items-center justify-around w-1/4">
           <img src="/logo.jpeg" className="h-22 mr-auto" alt="" />
 
           {pathname.includes("/exam-page") && (
@@ -31,13 +30,13 @@ const Header = () => {
         {pathname.includes("/exam-page") && (
           <Link onClick={handleClearHeader} to={"/"}>
             <div
-              className="bg-gray-300 p-2 hover:cursor-pointer flex space-x-2 rounded"
-              id="#user-profile"
+              className="bg-gray-300 p-2.5 hover:cursor-pointer place-items-center flex space-x-2"
+              id="#user-profile "
             >
-              <div className="rotate-45">
-                <CrossIcon />
+              <div className="bg-black rounded-full w-6 h-6 flex place-items-center justify-center items-center">
+                <span className="text-white text-lg font-extrabold">x</span>
               </div>
-              <span>CLOSE</span>
+              <span className="font-bold">CLOSE</span>
             </div>
           </Link>
         )}

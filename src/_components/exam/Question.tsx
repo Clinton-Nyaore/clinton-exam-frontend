@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { IQuestion } from "@/types/exam";
 import Answers from "./Answers";
-import { CalculatorIcon } from "lucide-react";
 
 const Question = ({
   question,
   index,
   length,
-  totalTime = 600, // Default 10 min per exam
-  pauseLimit = 3, // Max pauses allowed
+  totalTime = 3600,
+  pauseLimit = 300, // Total pause time allowed for the entire exam
 }: {
   question: IQuestion;
   index: number;
@@ -17,34 +16,43 @@ const Question = ({
   pauseLimit?: number;
 }) => {
   const [timeLeft, setTimeLeft] = useState(totalTime);
+  const [totalPauseTimeLeft, setTotalPauseTimeLeft] = useState(pauseLimit);
   const [isPaused, setIsPaused] = useState(false);
-  const [pausesRemaining, setPausesRemaining] = useState(pauseLimit);
 
-  // Timer Effect
+  // Exam Timer Effect
   useEffect(() => {
     if (!isPaused && timeLeft > 0) {
       const timer = setInterval(() => {
-        setTimeLeft((prevTime) => prevTime - 1);
+        setTimeLeft((prev) => prev - 1);
       }, 1000);
       return () => clearInterval(timer);
     }
   }, [isPaused, timeLeft]);
 
-  // Format time (MM:SS)
+  // Pause Timer Effect
+  useEffect(() => {
+    if (isPaused && totalPauseTimeLeft > 0) {
+      const pauseTimer = setInterval(() => {
+        setTotalPauseTimeLeft((prev) => prev - 1);
+        setTimeLeft((prev) => prev - 1); // Keep exam time in sync
+      }, 1000);
+
+      return () => clearInterval(pauseTimer);
+    } else if (isPaused && totalPauseTimeLeft === 0) {
+      setIsPaused(false); // Auto-resume when pause time is exhausted
+    }
+  }, [isPaused, totalPauseTimeLeft]);
+
+  const handlePause = () => {
+    if (totalPauseTimeLeft > 0) {
+      setIsPaused(!isPaused); // Toggle pause state
+    }
+  };
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-  };
-
-  // Handle Pause
-  const handlePause = () => {
-    if (pausesRemaining > 0) {
-      setIsPaused(!isPaused);
-      if (!isPaused) {
-        setPausesRemaining((prev) => prev - 1);
-      }
-    }
   };
 
   return (
@@ -66,20 +74,23 @@ const Question = ({
             </p>
             <p>
               Pause remaining:{" "}
-              <span className="text-gray-500">{pausesRemaining}</span>
+              <span className="text-gray-500">
+                {formatTime(totalPauseTimeLeft)}
+              </span>
             </p>
           </div>
-          <div className="mx-4">
+
+          <div className=" ">
             <button
-              className={`px-3 py-1.5 rounded ${
-                pausesRemaining > 0
-                  ? "bg-gray-300"
-                  : "bg-gray-400 cursor-not-allowed"
+              className={`px-6 py-3.5 font-bold ${
+                totalPauseTimeLeft === 0
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-gray-400"
               }`}
               onClick={handlePause}
-              disabled={pausesRemaining === 0}
+              disabled={totalPauseTimeLeft === 0}
             >
-              {isPaused ? "RESUME" : "PAUSE"}
+              {isPaused ? "PAUSED" : "PAUSE"}
             </button>
           </div>
         </div>
@@ -88,7 +99,11 @@ const Question = ({
           id="calculator-icon"
           className="flex justify-center items-center my-2"
         >
-          <CalculatorIcon size={"68px"} />
+          <img
+            className="h-16"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmUGnZyswJNYImmudNSvHEOkfbX_hK3HwzQ&s"
+            alt=""
+          />
         </div>
       </div>
 
@@ -98,7 +113,7 @@ const Question = ({
 
       {/* Dots section */}
       <div id="dots" className="">
-        <DotsSeparator count={25} />
+        <DotsSeparator count={45} />
       </div>
 
       <div className="ml-8 mt-2">
@@ -114,7 +129,7 @@ const DotsSeparator = ({ count }: { count: number }) => {
   return (
     <div id="dots" className="flex justify-between space-x-2 my-6 w-full">
       {Array.from({ length: count }).map((_, index) => (
-        <span key={index} className="w-2 h-2 bg-gray-400 rounded-full"></span>
+        <span key={index} className="w-2 h-2 bg-gray-600 rounded-full"></span>
       ))}
     </div>
   );
