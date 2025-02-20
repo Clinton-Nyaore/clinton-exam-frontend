@@ -19,13 +19,17 @@ const Header = () => {
   return (
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
-        <img src="/logo.jpeg" className="h-24" alt="" />
+        <div className="flex place-items-center justify-around w-1/2">
+          <img src="/logo.jpeg" className="h-24" alt="" />
 
-        {pathname.includes("/exam-page") && (
-          <div>
-            <p className="font-bold text-2xl text-gray-600">{examHeaderName}</p>
-          </div>
-        )}
+          {pathname.includes("/exam-page") && (
+            <div>
+              <p className="font-bold text-xl text-gray-600">
+                {examHeaderName}
+              </p>
+            </div>
+          )}
+        </div>
 
         {pathname.includes("/exam-page") && (
           <Link onClick={handleClearHeader} to={"/"}>
