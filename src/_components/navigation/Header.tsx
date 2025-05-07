@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import headerLogo from "@/assets/logo.jpeg";
+import Logout from "@/_forms/Logout";
 
 const Header = () => {
   const examHeaderName = useSelector(examName);
@@ -18,7 +19,12 @@ const Header = () => {
     <section className="border-t-red-400 border-t-4">
       <div className="relative flex place-items-center justify-between w-[80%] mx-auto ">
         <div className="flex place-items-center space-x-6 w-2/4">
-          <img src={headerLogo} className="h-22" alt="" />
+          
+          {pathname == "/" ? (
+            <Logout />
+          ) : (
+            <img src={headerLogo} className="h-22" alt="" />
+          )}
 
           {pathname.includes("/exam-page") && (
             <div>

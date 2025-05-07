@@ -14,6 +14,7 @@ import { MyButton, StyledInput } from "@/_components/inputs";
 import { useSignInMutation } from "@/state/features/auth/authApi";
 import { toaster } from "@/_components/toaster";
 import { useNavigate } from "react-router-dom";
+import { icons } from "@/constants/icons";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -25,7 +26,7 @@ const formSchema = z.object({
 
 const SignInForm = () => {
   const navigate = useNavigate();
-  const [signIn] = useSignInMutation();
+  const [signIn, { isLoading }] = useSignInMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,7 +46,7 @@ const SignInForm = () => {
         "error"
       );
 
-      return error
+      return error;
     }
   }
 
@@ -102,7 +103,15 @@ const SignInForm = () => {
           type="submit"
           className="bg-blue-500 w-full hover:bg-blue-400"
         >
-          Log in
+          <span>Log in</span>
+
+          {isLoading && (
+            <img
+              src={icons.progress}
+              alt="Loading indicator"
+              className="animate-spin"
+            />
+          )}
         </MyButton>
       </form>
     </Form>
