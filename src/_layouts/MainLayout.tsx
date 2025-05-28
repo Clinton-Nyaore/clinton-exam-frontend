@@ -40,7 +40,7 @@ const MainLayout = () => {
 
   const { pathname } = useLocation();
   return (
-    <main className={`${selectedColor} pb-8`}>
+    <main className={`${selectedColor} min-h-screen pb-8`}>
       {isLoggedIn ? (
         <>
           <Header />
