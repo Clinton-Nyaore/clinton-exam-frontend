@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { addExamName } from "@/state/features/exam/headerSlice";
 
-import examStartImage from '@/assets/start-exam.jpg'
+import { icons } from "@/lib/icons";
 
 const ExamStart = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ExamStart = () => {
   return (
     <section className={`${styles} flex `}>
       <div className="w-1/2">
-        <img src={examStartImage} className="h-auto w-full" alt="" />
+        <img src={icons.start} className="h-auto w-full" alt="" />
       </div>
       <div className="w-1/2 flex flex-col justify-center items-center">
         <div className="text-center w-2/3">

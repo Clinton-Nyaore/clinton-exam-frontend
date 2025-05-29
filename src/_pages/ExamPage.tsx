@@ -10,7 +10,7 @@ const ExamPage = () => {
   );
 
   return (
-    <section className="w-[80%] mx-auto min-h-screen">
+    <section className="w-[80%] mx-auto ">
       {exam?.questions && <QuestionViewer questionList={exam.questions} />}
     </section>
   );

@@ -6,10 +6,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import headerLogo from "@/assets/logo.jpeg";
 import { MyButton } from "@/_components/inputs";
 import { useDispatch } from "react-redux";
 import { logout } from "@/state/features/auth/authSlice";
+import { icons } from "@/lib/icons";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const Logout = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <img src={headerLogo} className="h-22" alt="" />
+        <img src={icons.headerLogo} className="h-22" alt="" />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -37,7 +37,6 @@ const Logout = () => {
             >
               Logout now
             </MyButton>
-
             <h3 className="my-2 text-lg">Select bg colors</h3>
             <div className="flex justify-between w-1/2">
               <div
@@ -60,7 +59,9 @@ const Logout = () => {
                 id="bg-white"
                 onClick={setBgToIdValue}
                 className="w-6 h-6 rounded-full hover:cursor-pointer bg-white"
-              >default</div>
+              >
+                default
+              </div>
             </div>
           </DialogDescription>
         </DialogHeader>
