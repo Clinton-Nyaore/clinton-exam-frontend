@@ -2,8 +2,8 @@
 import { useGetExamsQuery } from "@/state/features/exam/examApi";
 import { Link } from "react-router-dom";
 
-import logo from "@/assets/logo.jpeg";
-import { LoaderCircle } from "lucide-react";
+import {  LoaderCircle } from "lucide-react";
+import { icons } from "@/lib/icons";
 
 const ExamList = () => {
   const { data: examList, isLoading } = useGetExamsQuery("");
@@ -14,9 +14,9 @@ const ExamList = () => {
         <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 ">
           {examList?.map((exam, index) => {
             return (
-              <Link key={index} to={`/exam-start/${exam.name}`}>
+              <Link className="" key={index} to={`/exam-start/${exam.name}`}>
                 <section className="rounded shadow-md hover:cursor-pointer">
-                  <img className="w-44 rounded-md text-2xl" src={logo} alt="" />
+                  <img className="w-44 rounded-md text-2xl" src={icons.headerLogo} alt="" />
                   <div className="p-2 text-center">
                     <p className="font-bold text-md ">{exam.name}</p>
                     <p className="text-sm">{exam.description}</p>
