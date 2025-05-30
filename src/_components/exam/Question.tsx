@@ -6,6 +6,7 @@ const Question = ({
   question,
   index,
   length,
+  handleUpdateAnswers,
   totalTime = 3600,
   pauseLimit = 300, // Total pause time allowed for the entire exam
 }: {
@@ -14,6 +15,7 @@ const Question = ({
   length: number;
   totalTime?: number;
   pauseLimit?: number;
+  handleUpdateAnswers: (arg1: number, arg2: number) => void;
 }) => {
   const [timeLeft, setTimeLeft] = useState(totalTime);
   const [totalPauseTimeLeft, setTotalPauseTimeLeft] = useState(pauseLimit);
@@ -124,7 +126,12 @@ const Question = ({
       </div>
 
       <div className="ml-8 mt-2">
-        <Answers answers={question.answers} question={question.question_text} />
+        <Answers
+          handleUpdateAnswers={handleUpdateAnswers}
+          answers={question.answers}
+          question={question.question_text}
+          question_id={question.id}
+        />
       </div>
     </div>
   );

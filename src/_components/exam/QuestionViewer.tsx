@@ -7,10 +7,17 @@ import { Link } from "react-router-dom";
 const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [questions, setQuestions] = useState(questionList);
+
   const nextQuestion = () => {
     if (currentIndex < questionList.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
+  };
+
+  const handleUpdateAnswers = (question_id: number, answer_id: number) => {
+    console.log(question_id, answer_id,"Logged");
+    setQuestions((prev) => ({ ...prev }));
   };
 
   const handleExamSubmission = () => {};
@@ -18,9 +25,10 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
     <section className="">
       <div>
         <Question
-          question={questionList[currentIndex]}
+          question={questions[currentIndex]}
           index={currentIndex + 1}
           length={questionList.length}
+          handleUpdateAnswers={handleUpdateAnswers}
         />
       </div>
 
