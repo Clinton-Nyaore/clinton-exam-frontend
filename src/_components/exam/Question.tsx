@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { IQuestion } from "@/types/exam";
 import Answers from "./Answers";
+import { icons } from "@/lib/icons";
 
 const Question = ({
   question,
@@ -110,7 +111,7 @@ const Question = ({
         >
           <img
             className="h-16"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmUGnZyswJNYImmudNSvHEOkfbX_hK3HwzQ&s"
+            src={icons.calc}
             alt=""
           />
         </div>
