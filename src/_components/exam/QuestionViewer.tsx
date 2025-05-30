@@ -14,11 +14,25 @@ const QuestionViewer = ({ questionList }: { questionList: IQuestion[] }) => {
       setCurrentIndex(currentIndex + 1);
     }
   };
+  console.log(questions, "questions");
 
   const handleUpdateAnswers = (question_id: number, answer_id: number) => {
-    console.log(question_id, answer_id,"Logged");
-    setQuestions((prev) => ({ ...prev }));
+    setQuestions((prevQuestions) =>
+      prevQuestions.map((question) => {
+        if (question.id !== question_id) return question;
+
+        return {
+          ...question,
+          answers: question.answers.map((answer) => ({
+            ...answer,
+            is_correct: answer.id === answer_id,
+            selected: answer.id === answer_id, // optional if you’re tracking `selected`
+          })),
+        };
+      })
+    );
   };
+  
 
   const handleExamSubmission = () => {};
   return (

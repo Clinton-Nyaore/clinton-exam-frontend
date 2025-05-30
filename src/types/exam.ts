@@ -1,6 +1,6 @@
 export interface IAnswer {
   id: number;
-  correct: boolean;
+  is_correct: boolean;
   text: string;
   selected: boolean;
 }
